@@ -1,0 +1,72 @@
+{
+    "name": "shotanue/php-skeleton",
+    "description": "Generic PHP project skeleton package",
+    "keywords": ["Skeleton", "PSR"],
+    "homepage": "https://github.com/shotanue/PhpSkeleton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shotaro Hirukawa",
+            "email": "shotanue@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.4",
+        "composer/composer": "^2.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shotanue\\PhpSkeleton\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "__Vendor__\\__Package__\\": [
+                "tests",
+                "tests/Fake"
+            ]
+        }
+    },
+    "scripts": {
+        "pre-install-cmd": "Shotanue\\PhpSkeleton\\Installer::preInstall",
+        "post-install-cmd": "Shotanue\\PhpSkeleton\\Installer::postInstall",
+        "pre-update-cmd": "Shotanue\\PhpSkeleton\\Installer::preInstall",
+        "post-create-project-cmd": "Shotanue\\PhpSkeleton\\Installer::postInstall",
+        "setup": "php bin/setup.php",
+        "test": "./vendor/bin/phpunit",
+        "coverage": "php -dzend_extension=xdebug.so -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage",
+        "phpdbg": "phpdbg -qrr ./vendor/bin/phpunit --coverage-text --coverage-html ./build/coverage --coverage-clover=coverage.xml",
+        "pcov": "php -dextension=pcov.so -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage  --coverage-clover=coverage.xml",
+        "cs": "./vendor/bin/phpcs",
+        "cs-fix": "./vendor/bin/phpcbf src tests",
+        "metrics": "./vendor/bin/phpmetrics --report-html=build/metrics --exclude=Exception src",
+        "clean": ["./vendor/bin/phpstan clear-result-cache", "./vendor/bin/psalm --clear-cache"],
+        "sa": ["./vendor/bin/phpstan analyse -c phpstan.neon", "psalm --show-info=true"],
+        "tests": ["@cs", "@sa", "@test"],
+        "build": ["@clean", "@cs", "@sa", "@pcov", "@metrics"]
+    },
+    "scripts-descriptions": {
+        "test": "Run unit tests",
+        "coverage": "Generate test coverage report",
+        "phpdbg": "Generate test coverage report (phpdbg)",
+        "pcov": "Generate test coverage report (pcov)",
+        "cs": "Check the coding style",
+        "cs-fix": "Fix the coding style",
+        "clean": "Delete tmp files",
+        "sa": "Run static analysis",
+        "metrics": "Build metrics report",
+        "tests": "Run tests and quality checks",
+        "build": "Build project"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
+    }
+}
