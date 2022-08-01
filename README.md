@@ -1,6 +1,6 @@
 # A PHP project skeleton
 
-based on https://github.com/shotanue/PhpSkeleton
+based on https://github.com/koriym/Koriym.PhpSkeleton
 
 ## Create Project
 
